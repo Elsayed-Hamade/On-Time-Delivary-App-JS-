@@ -1,0 +1,175 @@
+/* APP DEFAULT */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fee45a;
+}
+
+/* MAIN APP STRUCTURE */
+.container {
+  width: 90%;
+  height: 90%;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.products-container {
+  grid-row: 1 / span 2;
+  border-radius: 2rem;
+  border: 3px rgb(255, 255, 255) solid;
+  box-shadow: 5px 5px 1px #9786323a;
+  background-color: #f24450;
+}
+
+.form-container {
+  border: 3px rgb(255, 255, 255) solid;
+  grid-row: 3;
+  border-radius: 2rem;
+  background-color: #f24450;
+  padding: 1rem;
+  box-shadow: 5px 5px 1px #9786323a;
+}
+
+.map {
+  box-shadow: 5px 5px 1px #9786323a;
+  border: 3px rgb(255, 255, 255) solid;
+  grid-row: 1 / span 3;
+  grid-column: 2 / span 2;
+  background: url(Assets/map.PNG);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 2rem;
+}
+
+/* FORM */
+.form {
+  border-radius: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2fr);
+  align-items: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+/* ----------- COMMON STYLING FOR FORM ITEMS */
+.company-container,
+.shipping-container {
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.company-container label,
+.shipping-container label,
+.link-container label {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+}
+
+.company-container select,
+.shipping-container select {
+  border: none;
+  outline: none;
+  background: none;
+  color: white;
+  border-bottom: 2px white solid;
+  font-family: "poppins", sans-serif;
+  width: 100%;
+}
+
+/* --- COMPANY */
+.company-container {
+  grid-column: 1 / span 1;
+}
+
+/* --- SHIPPING */
+.shipping-container {
+  grid-column: 2 / span1;
+}
+
+.shipping-container {
+  grid-column: 2 / span 1;
+}
+
+option{
+  background-color: #fea613;
+  border: none;
+  color: white;
+  font-weight: 500;
+}
+
+
+/* --- LINK */
+.link-container {
+  grid-column: 1 / span 2;
+}
+
+.link-container {
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.link {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 2px white solid;
+  font-family: "poppins", sans-serif;
+  outline: none;
+  color: rgb(207, 207, 207);
+}
+
+.link::placeholder {
+  color: #fee45a;
+}
+
+.days-price-container {
+  grid-column: 1 / span 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.days-price-container span {
+  color: #ffd000;
+  margin-left: 1rem;
+}
+
+.submit-btn {
+  grid-column: 1 / span 2;
+  background: #fea613;
+  border: none;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-family: "poppins", sans-serif;
+  color: white;
+  transition: background 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #ffb83d;
+}
+
+
+/* PRODUCTS */

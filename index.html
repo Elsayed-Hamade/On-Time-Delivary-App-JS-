@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="Assets/logo.png" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>On Time | Your Delivery is on time</title>
+  </head>
+  <body>
+    <div class="container">
+      <!-- DISPLAY SELECTED INFO -->
+      <div class="products-container">
+        <div class="product">
+          <h1 class="product-id">1</h1>
+          <div class="product-info">
+            <!-- COMPANY -->
+            <div class="selected-company">
+              <i class="fa-solid fa-globe"></i>
+              <p class="selected-company-name">Amazon</p>
+            </div>
+            <!-- SHIPPING -->
+            <div class="selected-shipping">
+              <i class="fa-solid fa-cart-flatbed"></i>
+              <p class="selected-shipping-type">Regular</p>
+            </div>
+            <!-- LINK -->
+            <div class="selected-link">
+              <i class="fa-solid fa-link"></i>
+              <a href="#" class="selected-link-href">Link</a>
+            </div>
+            <!-- DAYS -->
+            <div class="days-selected">
+              <p class="days-selected-number">
+                Days : <span class="days-number">10</span>
+              </p>
+            </div>
+            <!-- PRICE -->
+            <div class="price-selected">
+              <p class="price-selected-number price">
+                Price : <span class="price-number">10</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- FORM TO GET INFO -->
+      <div class="form-container">
+        <form class="form">
+          <div class="company-container">
+            <label class="company-label"
+              ><i class="fa-solid fa-globe"></i
+            ></label>
+            <select class="company">
+              <option value="amazon">Amazon</option>
+              <option value="bestBuy">Best Buy</option>
+            </select>
+          </div>
+          <div class="shipping-container">
+            <label class="shipping-label">
+              <i class="fa-solid fa-cart-flatbed"></i>
+            </label>
+            <select class="shipping">
+              <option value="regular">Regular</option>
+              <option value="fast" class="fast">Fast</option>
+            </select>
+          </div>
+          <div class="link-container">
+            <label class="link-label"><i class="fa-solid fa-link"></i></label>
+            <input type="text" class="link" placeholder="link" />
+          </div>
+          <div class="days-price-container">
+            <p class="days">Day: <span class="days-number-form">10</span></p>
+            <p class="price">Price: <span class="price-number-form">10</span></p>
+          </div>
+          <input type="submit" class="submit-btn" />
+        </form>
+      </div>
+      <!-- MAP CONTAINER -->
+      <div class="map"></div>
+    </div>
+  </body>
+</html>
