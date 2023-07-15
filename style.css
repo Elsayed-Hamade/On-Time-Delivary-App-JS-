@@ -17,6 +17,11 @@ body {
   background-color: #fee45a;
 }
 
+::selection{
+  color: white;
+  background-color: #f24450;
+}
+
 /* MAIN APP STRUCTURE */
 .container {
   width: 90%;
@@ -107,13 +112,12 @@ body {
   grid-column: 2 / span 1;
 }
 
-option{
+option {
   background-color: #fea613;
   border: none;
   color: white;
   font-weight: 500;
 }
-
 
 /* --- LINK */
 .link-container {
@@ -171,5 +175,100 @@ option{
   background-color: #ffb83d;
 }
 
-
 /* PRODUCTS */
+.products-container{
+  overflow-y:scroll;
+}
+
+.products-container::-webkit-scrollbar{
+  width: 0rem;
+}
+
+.product {
+  background-color: #ff5864;
+  margin: 1rem;
+  border-radius: 1rem;
+  color: white;
+  position: relative;
+  padding: 1rem;
+  animation: toTop .6s ;
+}
+
+.product-id {
+  background-color: #fea613;
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 1px 1px 0px rgba(49, 49, 49, 0.055);
+}
+
+.product-info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  font-size: 1.5rem;
+}
+
+.selected-shipping,
+.selected-link,
+.selected-company, .delete {
+  display: flex;
+  align-items: center;
+}
+
+
+.product i{
+  font-size: 1.4rem;
+  margin-right: 1rem;
+}
+
+.selected-link-href{
+  color: #fee45a;
+  cursor: pointer;
+}
+
+.days-selected-number, .price-selected-number{
+  font-weight: bold;
+}
+
+.days-selected-number span, .price-selected-number span{
+  font-weight: normal;
+  color: #fee45a;
+  margin-left: .5rem;
+  font-size: 1.5rem;
+}
+
+.delete{
+  justify-content: center;
+  width: 10rem;
+  padding: .5rem;
+  border-radius: .5rem;
+  border: none;
+  color: white;
+  background-color: #fea613;
+  font-family: "poppins", sans-serif;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background .3s ease-in-out;
+}
+
+.delete:hover{
+  background-color: #ffb83d;
+}
+
+@keyframes toTop {
+  0%{
+    transform: translateY(10rem);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
