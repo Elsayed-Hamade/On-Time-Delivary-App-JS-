@@ -17,7 +17,7 @@ body {
   background-color: #fee45a;
 }
 
-::selection{
+::selection {
   color: white;
   background-color: #f24450;
 }
@@ -45,6 +45,7 @@ body {
   border: 3px rgb(255, 255, 255) solid;
   grid-row: 3;
   border-radius: 2rem;
+  position: relative;
   background-color: #f24450;
   padding: 1rem;
   box-shadow: 5px 5px 1px #9786323a;
@@ -55,7 +56,6 @@ body {
   border: 3px rgb(255, 255, 255) solid;
   grid-row: 1 / span 3;
   grid-column: 2 / span 2;
-  background: url(Assets/map.PNG);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -175,12 +175,51 @@ option {
   background-color: #ffb83d;
 }
 
-/* PRODUCTS */
-.products-container{
-  overflow-y:scroll;
+.form-overlay {
+  width: 100%;
+  height: 100%;
+  background-color: #ff5863da;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2rem;
+  color: white;
+  font-size: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: fadeIn 1s;
 }
 
-.products-container::-webkit-scrollbar{
+.form-overlay-text {
+  max-width: 25rem;
+  text-transform: capitalize;
+  text-align: center;
+  font-weight: bold;
+  word-spacing: 3px;
+}
+
+.form-overlay i {
+  width: 4rem;
+  height: 4rem;
+  border: 3px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.form-overlay.hidden {
+  animation: fadeOut 1s;
+}
+
+/* PRODUCTS */
+.products-container {
+  overflow-y: scroll;
+}
+
+.products-container::-webkit-scrollbar {
   width: 0rem;
 }
 
@@ -191,7 +230,7 @@ option {
   color: white;
   position: relative;
   padding: 1rem;
-  animation: toTop .6s ;
+  animation: toTop 0.6s;
 }
 
 .product-id {
@@ -217,58 +256,152 @@ option {
 
 .selected-shipping,
 .selected-link,
-.selected-company, .delete {
+.selected-company,
+.delete {
   display: flex;
   align-items: center;
 }
 
-
-.product i{
+.product i {
   font-size: 1.4rem;
   margin-right: 1rem;
 }
 
-.selected-link-href{
+.selected-link-href {
   color: #fee45a;
   cursor: pointer;
 }
 
-.days-selected-number, .price-selected-number{
+.days-selected-number,
+.price-selected-number {
   font-weight: bold;
 }
 
-.days-selected-number span, .price-selected-number span{
+.days-selected-number span,
+.price-selected-number span {
   font-weight: normal;
   color: #fee45a;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   font-size: 1.5rem;
 }
 
-.delete{
+.delete {
   justify-content: center;
   width: 10rem;
-  padding: .5rem;
-  border-radius: .5rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   border: none;
   color: white;
   background-color: #fea613;
   font-family: "poppins", sans-serif;
   font-size: 1.5rem;
   cursor: pointer;
-  transition: background .3s ease-in-out;
+  transition: background 0.3s ease-in-out;
 }
 
-.delete:hover{
+.delete:hover {
   background-color: #ffb83d;
 }
 
+/* Animations */
+
 @keyframes toTop {
-  0%{
+  0% {
     transform: translateY(10rem);
     opacity: 0;
   }
-  100%{
+  100% {
     transform: translateY(0);
     opacity: 1;
   }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes popUp {
+  0% {
+    transform: scale(0);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes ReversePopUp {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+/* Message */
+.message {
+  padding: 1rem;
+  background-color: #f24450;
+  color: white;
+  border: white solid 2px;
+  box-shadow: 3px 3px 1px #9786323a;
+  border-radius: 2rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 8.5rem;
+  z-index: 1000;
+  text-align: center;
+  display: none;
+  transition: .3s;
+}
+
+.message i {
+  cursor: pointer;
+  border: white solid 2px;
+  box-shadow: 3px 3px 1px #9786323a;
+  width: 2rem;
+  height: 2rem;
+  box-shadow: 3px 3px 1px #9786323a;
+  border-radius: 2rem;
+  padding: 1rem;
+  background-color: #f24450;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.message.visible {
+  display: block;
+  animation: popUp 1s;
 }

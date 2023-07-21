@@ -15,37 +15,46 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <!-- Link Leaflet -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+
     <title>On Time | Your Delivery is on time</title>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div class="container">
       <!-- DISPLAY SELECTED INFO -->
       <div class="products-container">
-        <div class="product">
+        <!-- <div class="product">
           <h1 class="product-id">1</h1>
           <div class="product-info">
-            <!-- COMPANY -->
             <div class="selected-company">
               <i class="fa-solid fa-globe"></i>
               <p class="selected-company-name">Amazon</p>
             </div>
-            <!-- SHIPPING -->
             <div class="selected-shipping">
               <i class="fa-solid fa-cart-flatbed"></i>
               <p class="selected-shipping-type">Regular</p>
             </div>
-            <!-- LINK -->
             <div class="selected-link">
               <i class="fa-solid fa-link"></i>
               <a href="#" class="selected-link-href">Link</a>
             </div>
-            <!-- DAYS -->
             <div class="days-selected">
               <p class="days-selected-number">
                 Days : <span class="days-number">10</span>
               </p>
             </div>
-            <!-- PRICE -->
             <div class="price-selected">
               <p class="price-selected-number">
                 Price : <span class="price-number">10</span>
@@ -56,7 +65,7 @@
               Delete
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
       <!-- FORM TO GET INFO -->
       <div class="form-container">
@@ -83,17 +92,22 @@
             <label class="link-label"><i class="fa-solid fa-link"></i></label>
             <input type="text" class="link" placeholder="link" />
           </div>
-          <div class="days-price-container">
-            <p class="days">Day: <span class="days-number-form">10</span></p>
-            <p class="price">
-              Price: <span class="price-number-form">10</span>
-            </p>
-          </div>
+
           <input type="submit" class="submit-btn" />
         </form>
+        <div class="form-overlay">
+          <i class="fa-solid fa-location-dot"></i>
+          <p class="form-overlay-text">
+            please select your location on the map
+          </p>
+        </div>
       </div>
       <!-- MAP CONTAINER -->
-      <div class="map"></div>
+      <div class="map" id="map"></div>
+    </div>
+    <div class="message">
+      <p class="message-content">Hi</p>
+      <i class="fa-solid fa-xmark close-message"></i>
     </div>
   </body>
 </html>
