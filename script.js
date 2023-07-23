@@ -6,9 +6,11 @@ const linkInput = document.querySelector(".link");
 const submitBtn = document.querySelector(".submit-btn");
 const companyInput = document.querySelector(".company");
 const shippingInput = document.querySelector(".shipping");
-// const productsContainer = document.querySelector(".products-container");
+const productsContainer = document.querySelector(".products-container");
+const deleteBtns = document.querySelector(".delete");
 
 class Order {
+  id = (Date.now() + "").slice(-9);
   constructor(coords, company, shipping, link, distance) {
     this.coords = coords;
     this.company = company;
@@ -19,15 +21,23 @@ class Order {
   }
 
   _calcDaysPrice() {
-    if (this.shipping === "regular") {
+    if (this.shipping === "Regular") {
       this.price = Math.floor(this.distance / 100);
       this.days = Math.floor(this.price / 10);
     }
-    if (this.shipping === "fast") {
+    if (this.shipping === "Fast") {
       this.price = Math.floor(this.distance / 50);
       this.days = Math.floor(this.price / 20);
     }
     return this.price, this.days;
+  }
+
+  _description() {
+    const desHtml = `
+      <h4>${this.company}</h4>
+      <p>ID: ${this.id}</p>
+    `;
+    return desHtml;
   }
 }
 
@@ -35,10 +45,14 @@ class App {
   #map;
   #mapEv;
   #orders = [];
+  #markers = [];
   constructor() {
     this._getPosition();
     submitBtn.addEventListener("click", this._newOrder.bind(this));
     closeMessage.addEventListener("click", this._hideMessage);
+    productsContainer.addEventListener("click", (e) => {
+      this._delete(e);
+    });
   }
 
   // Map Functionality
@@ -55,8 +69,8 @@ class App {
     );
   }
 
-  _loadMap(lat, long) {
-    this.#map = L.map("map").setView([lat, long], 18);
+  _loadMap(lat, lng) {
+    this.#map = L.map("map").setView([lat, lng], 18);
     L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -77,7 +91,7 @@ class App {
         companyValue,
         shippingValue,
         linkValue,
-        this._calcDistance()
+        this._calcDistance(lat, lng)
       );
       this.#orders.push(order);
       linkInput.value = "";
@@ -85,19 +99,33 @@ class App {
       this._showMessage("Please, Enter Your Product Link");
     }
     this._addMarker(order);
+    this._showFormOverlay();
+    this._addOrders(order);
   }
 
   _showForm(mapEvent) {
     this.#mapEv = mapEvent;
     this._hideFormOverlay();
-    this._calcDistance();
   }
 
   _addMarker(order) {
     // START HERE
-    L.marker(order.coords)
-      .addTo(this.#map)
-      .bindPopup("A pretty CSS popup.<br> Easily customizable.");
+    if (order) {
+      const marker = L.marker(order.coords)
+        .addTo(this.#map)
+        .bindPopup(
+          L.popup({
+            minWidth: 50,
+            maxWidth: 100,
+            autoClose: false,
+            closeOnClick: false,
+            className: "popup",
+          })
+        )
+        .setPopupContent(`${order._description()}`)
+        .openPopup();
+      this.#markers.push(marker);
+    }
   }
 
   _calcDistance(lat, lng) {
@@ -121,6 +149,77 @@ class App {
     return distance;
   }
 
+  _addOrders(order) {
+    const orderHtml = `
+      <div class="product">
+      <h1 class="product-id">${order.id}</h1>
+      <div class="product-info">
+        <div class="selected-company">
+          <i class="fa-solid fa-globe"></i>
+          <p class="selected-company-name">${order.company}</p>
+        </div>
+        <div class="selected-shipping">
+          <i class="fa-solid fa-cart-flatbed"></i>
+          <p class="selected-shipping-type">${order.shipping}</p>
+        </div>
+        <div class="selected-link">
+          <i class="fa-solid fa-link"></i>
+          <a href="${
+            order.link
+          }" class="selected-link-href" target="_blank">${order.link.slice(
+      0,
+      6
+    )}....</a>
+        </div>
+        <div class="days-selected">
+          <p class="days-selected-number">
+            Days : <span class="days-number">${order.days}</span>
+          </p>
+        </div>
+        <div class="price-selected">
+          <p class="price-selected-number">
+            Price : <span class="price-number">${order.price}</span>
+          </p>
+        </div>
+        <button class="delete">
+          <i class="fa-solid fa-trash"></i>
+          Delete
+        </button>
+      </div>
+    </div>
+      `;
+
+    productsContainer.insertAdjacentHTML("afterbegin", orderHtml);
+  }
+
+  _delete(event) {
+    if (event.target.classList.contains("delete")) {
+      productsContainer.textContent = "";
+      const targetID =
+        event.target.closest(".product-info").previousElementSibling
+          .textContent;
+      this.#orders.forEach((order) => {
+        if (order.id === targetID) {
+          const index = this.#orders.indexOf(order);
+          this.#orders.splice(index, 1);
+          this.#markers.forEach((marker) => {
+            if (
+              marker._latlng.lat === order.coords[0] &&
+              marker._latlng.lng === order.coords[1]
+            ) {
+              this.#map.removeLayer(marker);
+              const indexMarker = this.#markers.indexOf(marker);
+              this.#orders.splice(indexMarker, 1);
+            }
+          });
+        }
+      });
+    }
+    this.#orders.forEach((order) => {
+      this._addOrders(order);
+    });
+  }
+
   // UI Functionality
   _showMessage(content) {
     messageContent.innerHTML = content;
@@ -140,6 +239,11 @@ class App {
     setTimeout(() => {
       formOverlay.style.display = "none";
     }, 800);
+  }
+
+  _showFormOverlay() {
+    formOverlay.classList.remove("hidden");
+    formOverlay.style.display = "flex";
   }
 }
 
