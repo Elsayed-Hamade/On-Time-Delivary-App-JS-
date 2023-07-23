@@ -18,6 +18,7 @@ class Order {
     this.link = link;
     this.distance = distance;
     this._calcDaysPrice();
+    this.description = this._description();
   }
 
   _calcDaysPrice() {
@@ -33,11 +34,11 @@ class Order {
   }
 
   _description() {
-    const desHtml = `
+    const descHtml = `
       <h4>${this.company}</h4>
       <p>ID: ${this.id}</p>
     `;
-    return desHtml;
+    return descHtml;
   }
 }
 
@@ -48,6 +49,7 @@ class App {
   #markers = [];
   constructor() {
     this._getPosition();
+    this._getLocalStorage();
     submitBtn.addEventListener("click", this._newOrder.bind(this));
     closeMessage.addEventListener("click", this._hideMessage);
     productsContainer.addEventListener("click", (e) => {
@@ -76,6 +78,9 @@ class App {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.#map);
     this.#map.on("click", this._showForm.bind(this));
+    this.#orders.forEach((order) => {
+      this._addMarker(order);
+    });
   }
 
   _newOrder(e) {
@@ -101,6 +106,7 @@ class App {
     this._addMarker(order);
     this._showFormOverlay();
     this._addOrders(order);
+    this._setLocalStorage();
   }
 
   _showForm(mapEvent) {
@@ -109,7 +115,6 @@ class App {
   }
 
   _addMarker(order) {
-    // START HERE
     if (order) {
       const marker = L.marker(order.coords)
         .addTo(this.#map)
@@ -122,7 +127,7 @@ class App {
             className: "popup",
           })
         )
-        .setPopupContent(`${order._description()}`)
+        .setPopupContent(`${order.description}`)
         .openPopup();
       this.#markers.push(marker);
     }
@@ -218,8 +223,22 @@ class App {
     this.#orders.forEach((order) => {
       this._addOrders(order);
     });
+
+    this._setLocalStorage();
   }
 
+  _setLocalStorage() {
+    localStorage.setItem("ordersData", JSON.stringify(this.#orders));
+  }
+
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem("ordersData"));
+    if (!data) return;
+    this.#orders = data;
+    this.#orders.forEach((order) => {
+      this._addOrders(order);
+    });
+  }
   // UI Functionality
   _showMessage(content) {
     messageContent.innerHTML = content;
