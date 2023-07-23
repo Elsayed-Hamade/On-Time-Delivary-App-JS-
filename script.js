@@ -219,10 +219,10 @@ class App {
           });
         }
       });
+      this.#orders.forEach((order) => {
+        this._addOrders(order);
+      });
     }
-    this.#orders.forEach((order) => {
-      this._addOrders(order);
-    });
 
     this._setLocalStorage();
   }
