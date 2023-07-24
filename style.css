@@ -243,8 +243,8 @@ option {
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: .5rem;
-  padding: .5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   box-shadow: 1px 1px 0px rgba(49, 49, 49, 0.055);
   font-size: 1rem;
 }
@@ -434,9 +434,42 @@ option {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: .9rem;
+  font-size: 0.9rem;
   width: 1.5rem;
   height: 1.5rem;
   background-color: #fea613;
   border-radius: 50%;
+}
+
+/* Media Query */
+
+@media screen and (max-width: 1300px) {
+  .map {
+    grid-row: 1 / span 2;
+    grid-column: 1 / span 3;
+  }
+
+  .products-container {
+    grid-row: 3;
+    grid-column: 1 / span 2;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .map {
+    grid-row: 1;
+  }
+  .products-container {
+    grid-column: 1 / span 3;
+    grid-row: 2;
+  }
+
+  .form-container {
+    grid-column: 1 / span 3;
+  }
+
+  .product-id{
+    position: initial;
+    margin-bottom: 1rem;
+  }
 }
