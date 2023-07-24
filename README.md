@@ -11,7 +11,6 @@
 - 2️⃣ Second: Enter your product info in the form
 - 3️⃣ Third: Submit the order; if you want to delete it, you can do so via the delete button in the product.
 
----
 
 # ⛔Note :
 
